@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CubeBehavior : MonoBehaviour {
 	public OreType mytype;
+	bool isRotating = false;
 
 
 	// Use this for initialization
@@ -25,6 +26,7 @@ public class CubeBehavior : MonoBehaviour {
 		}
 	
 	}
+
 	void OnMouseDown()
 	{
 		Destroy (gameObject);
@@ -50,10 +52,19 @@ public class CubeBehavior : MonoBehaviour {
 			GameController.score += GameController.kryptonitePoints;
 		}
 	}
-
-
+	void OnMouseEnter()
+	{
+		isRotating = true;
+	}
+	void OnMouseExit()
+	{
+		isRotating = false;
+	}
 	// Update is called once per frame
 	void Update () {
+		if (isRotating) {
+			gameObject.transform.rotation = Quaternion.AngleAxis (90 * Time.deltaTime, Vector3.up) * gameObject.transform.rotation;
+		}
 	
 	}
 }

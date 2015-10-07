@@ -4,20 +4,25 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 	public float spawnTime;
 	float timeToAct = 0.0f;
+
 	public GameObject bronzeCubePrefab;
 	public GameObject silverCubePrefab;
 	public GameObject goldCubePrefab;
 	public GameObject kryptoniteCubePrefab;
+
 	public static int bronzeCount = 0;
 	public static int silverCount = 0;
 	public static int goldCount = 0;
 	public static int kryptoniteCount = 0;
+
 	public static int bronzePoints = 1;
 	public static int silverPoints = 10;
 	public static int goldPoints = 100;
 	public static int kryptonitePoints = 1000;
 	public static int score = 0;
+
 	private bool recentlySpawnedGold = false;
+
 	float timer;
 	float minutes;
 	float seconds;
@@ -44,8 +49,8 @@ public class GameController : MonoBehaviour {
 		if (Time.time >= timeToAct) 
 		{
 	
-			if ((silverCount + kryptoniteCount == 2 && goldCount == 2)
-			    || (silverCount == 2 && goldCount + kryptoniteCount == 2)&& kryptoniteCount < 3)
+			if ((silverCount + kryptoniteCount == goldCount)
+			    || (silverCount == goldCount + kryptoniteCount) && kryptoniteCount < 3)
 			{
 				Instantiate (kryptoniteCubePrefab,
 				             new Vector3(Random.Range (-9f,9f), Random.Range (-3f, 5f), 0),
@@ -53,8 +58,7 @@ public class GameController : MonoBehaviour {
 				kryptoniteCount++;
 				recentlySpawnedGold = false;
 			}
-			if ((bronzeCount == 2 && silverCount + kryptoniteCount == 2) 
-			    || (bronzeCount + kryptoniteCount == 2 && silverCount == 2) && recentlySpawnedGold == false)
+			else if (bronzeCount == 2 && silverCount == 2 && recentlySpawnedGold == false)
 			{
 				Instantiate(goldCubePrefab,
 				            new Vector3(Random.Range (-9f,9f), Random.Range (-3f,5f), 0),
