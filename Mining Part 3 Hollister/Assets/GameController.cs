@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour {
 	float timer;
 	float minutes;
 	float seconds;
+	string minutesString;
+	string secondsString;
 
 	// Use this for initialization
 	void Start () {
@@ -37,8 +39,26 @@ public class GameController : MonoBehaviour {
 	{
 		timer = Time.time;
 		minutes = timer / 60;
+		minutes = (int)minutes;
 		seconds = timer % 60;
-		GUI.Label (new Rect (10, 10, 50, 20), (int)minutes + ":" + (int)seconds);
+		seconds = (int)seconds;
+		if (minutes < 10) 
+		{
+			minutesString = "0" + minutes.ToString ();
+		} 
+		else 
+		{
+			minutesString = minutes.ToString ();
+		}
+		if (seconds < 10) 
+		{
+			secondsString = "0" + seconds.ToString ();
+		} 
+		else 
+		{
+			secondsString = seconds.ToString ();
+		}
+		GUI.Label (new Rect (10, 10, 50, 20), minutesString + ":" + secondsString);
 
 		GUI.Label (new Rect (100, 10, 100, 20), "Score: " + score);
 	}
