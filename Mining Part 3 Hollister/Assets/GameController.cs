@@ -4,6 +4,7 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 	public float spawnTime;
 	float timeToAct = 0.0f;
+	public bool showText = true;
 
 	public GameObject bronzeCubePrefab;
 	public GameObject silverCubePrefab;
@@ -61,10 +62,19 @@ public class GameController : MonoBehaviour {
 		GUI.Label (new Rect (10, 10, 50, 20), minutesString + ":" + secondsString);
 
 		GUI.Label (new Rect (100, 10, 100, 20), "Score: " + score);
+
+		if (showText) 
+		{
+			GUI.Label (new Rect (250, 250, 500, 20), "Use the Up and Down Arrow to control spawn time");
+		}
 	}
 	// Update is called once per frame
 	void Update () {
 
+		if (Time.time > 5) 
+		{
+			showText = false;
+		}
 
 		if (Time.time >= timeToAct) 
 		{
@@ -106,6 +116,17 @@ public class GameController : MonoBehaviour {
 
 			timeToAct += spawnTime;
 		}
-	
+
+		if (Input.GetKeyDown (KeyCode.DownArrow)) 
+		{
+			if (spawnTime > 1)
+			{
+				spawnTime--;
+			}
+		}
+		if (Input.GetKeyDown (KeyCode.UpArrow)) 
+		{
+			spawnTime++;
+		}
 	}
 }
