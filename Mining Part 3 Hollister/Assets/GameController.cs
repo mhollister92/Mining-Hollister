@@ -79,8 +79,8 @@ public class GameController : MonoBehaviour {
 		if (Time.time >= timeToAct) 
 		{
 	
-			if ((silverCount + kryptoniteCount == goldCount)
-			    || (silverCount == goldCount + kryptoniteCount) && kryptoniteCount < 3)
+			if (((silverCount + kryptoniteCount == goldCount)
+			    || (silverCount == goldCount + kryptoniteCount)) && kryptoniteCount < 3)
 			{
 				Instantiate (kryptoniteCubePrefab,
 				             new Vector3(Random.Range (-9f,9f), Random.Range (-3f, 5f), 0),
